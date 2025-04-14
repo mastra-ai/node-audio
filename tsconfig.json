@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/esm",
+    "module": "ESNext",
+    "target": "ES2022",
+    "moduleResolution": "node",
+    "declaration": true,
+    "declarationDir": "./dist/types",
+    "sourceMap": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "rootDir": "./src"
+  },
+  "include": ["src"]
+} 

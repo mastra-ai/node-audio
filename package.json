@@ -1,0 +1,33 @@
+{
+  "name": "@mastra/node-audio",
+  "version": "0.1.0",
+  "description": "Cross-platform mic/audio recording + playback for Mastra in Node.js",
+  "main": "./dist/cjs/main.js",
+  "module": "./dist/esm/main.js",
+  "types": "./dist/types/main.d.ts",
+  "exports": {
+    "require": "./dist/cjs/main.js",
+    "import": "./dist/esm/main.js",
+    "types": "./dist/types/main.d.ts"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json && tsc -p tsconfig.cjs.json",
+    "dev": "ts-node src/main.ts"
+  },
+  "dependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "@mastra/node-speaker": "latest",
+    "fluent-ffmpeg": "^2.1.2",
+    "fluent-ffmpeg-multistream": "^1.0.0",
+    "node-mic": "^1.0.1"
+  },
+  "devDependencies": {
+    "@types/fluent-ffmpeg": "^2.1.27",
+    "typescript": "^5.4.0",
+    "ts-node": "^10.9.1"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+} 
