@@ -1,2 +1,4 @@
 dist/
 node_modules/
+src/examples/*/output.*
+1.sock

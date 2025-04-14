@@ -24,8 +24,8 @@ npm install @mastra/node-audio
 
 This package wraps native audio libraries. You may need additional system dependencies:
 
-#### 🖥 Speaker Backend
-- Docs: [node-speaker - Audio backend selection](https://github.com/TooTallNate/node-speaker?tab=readme-ov-file#audio-backend-selection)
+#### 🖥 Speaker
+- Docs: [node-speaker - Audio selection](https://github.com/TooTallNate/node-speaker?tab=readme-ov-file#audio-backend-selection)
 
 #### 🎙 Microphone Input
 - Docs: [node-mic](https://github.com/Symbitic/node-mic)

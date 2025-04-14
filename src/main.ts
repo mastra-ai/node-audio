@@ -1,4 +1,5 @@
-export * from "./lib/microphone";
-export * from "./lib/speaker";
-export * from "./lib/recorder";
-export * from "./lib/huddle";
+export { getMicrophoneStream } from "./lib/microphone";
+export { playAudio } from "./lib/speaker";
+export { recordAudioToFile } from "./lib/recorder";
+export { createHuddle } from "./lib/huddle";
+export { pathUrlOrStreamToStream } from "./lib/utils";

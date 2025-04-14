@@ -2,6 +2,7 @@ import ffmpegPath from "@ffmpeg-installer/ffmpeg";
 import ffmpeg from "fluent-ffmpeg";
 import { StreamInput } from "fluent-ffmpeg-multistream";
 import { PassThrough } from "stream";
+import { EventEmitter } from "events";
 
 ffmpeg.setFfmpegPath(ffmpegPath.path);
 
@@ -18,12 +19,27 @@ export type RecorderOptions = {
   }
 };
 
-export class Recorder {
+export type RecorderEvents = {
+  start: [];
+  end: [];
+  progress: [{
+    frames: number;
+    currentFps: number;
+    currentKbps: number;
+    targetSize: number;
+    timemark: string;
+    percent?: number | undefined;
+  }];
+  error: [Error];
+}
+
+export class Recorder extends EventEmitter<RecorderEvents> {
   stream: NodeJS.WritableStream;
 
-  ffmpeg = defaultFfmpegOptions
+  ffmpeg = defaultFfmpegOptions;
 
   constructor(public options: RecorderOptions) {
+    super();
     this.stream = new PassThrough();
     if (options.ffmpeg?.inputOptions) {
       this.ffmpeg.inputOptions = options.ffmpeg.inputOptions
@@ -38,6 +54,18 @@ export class Recorder {
       .addInput(new StreamInput(this.stream).url)
       .addInputOptions(this.ffmpeg.inputOptions || [])
       .outputOptions(this.ffmpeg.outputOptions || [])
+      .on('start', () => {
+        this.emit('start');
+      })
+      .on('progress', (progress) => {
+        this.emit('progress', progress);
+      })
+      .on('end', () => {
+        this.emit('end');
+      })
+      .on('error', (err) => {
+        this.emit('error', err);
+      })
       .output(this.options.outputPath); // Specify the output file path
 
     proc.run()
