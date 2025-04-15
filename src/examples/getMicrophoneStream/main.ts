@@ -2,18 +2,10 @@ import { getMicrophoneStream, recordAudioToFile } from "../../main";
 
 const stream = getMicrophoneStream();
 
-const recorder = recordAudioToFile(stream, {
-  outputPath: 'src/examples/getMicrophoneStream/output.mp3',
-});
+const outputPath = 'src/examples/getMicrophoneStream/output.mp3';
+
+const recorder = recordAudioToFile(stream, { outputPath });
 
 recorder.on('start', () => {
-  console.log('Recording started... Ctrl+C to stop');
-});
-
-recorder.on('end', () => {
-  console.log('Recording ended');
-});
-
-recorder.on('error', (error) => {
-  console.error(error);
+  console.log(`Recording to ${outputPath}... Ctrl+C to stop`);
 });

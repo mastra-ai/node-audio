@@ -3,8 +3,6 @@ import path from "path";
 
 const __dir = path.resolve(process.cwd(), 'src/examples');
 
-console.log(__dir);
-
 async function main() {
   let executed = false;
   const files = await fs.promises.readdir(__dir, { recursive: true });
