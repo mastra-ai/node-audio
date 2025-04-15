@@ -10,10 +10,6 @@ recorder.on('start', () => {
   console.log('Recording started... Ctrl+C to stop');
 });
 
-recorder.on('progress', (data) => {
-  console.log(`Recording progress: ${data.percent}%`);
-});
-
 recorder.on('end', () => {
   console.log('Recording ended');
 });
