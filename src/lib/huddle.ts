@@ -99,6 +99,13 @@ class Huddle extends EventEmitter<HuddleEvents> {
     this.recorder?.stream.end();
   }
 
+  public interrupt() {
+    if (this.speaker) {
+      this.speaker.close(true);
+      this.speaker = undefined;
+    }
+  }
+
   public play(stream: NodeJS.ReadableStream) {
     if (this.speaker) {
       this.speaker.removeAllListeners();
