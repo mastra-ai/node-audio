@@ -21,6 +21,7 @@
     "example": "npx bun run src/examples/main.ts"
   },
   "dependencies": {
+    "@bropat/fluent-ffmpeg": "^2.1.3",
     "@ffmpeg-installer/ffmpeg": "^1.1.0",
     "@mastra/node-speaker": "latest",
     "fluent-ffmpeg": "^2.1.2",
@@ -29,8 +30,8 @@
   },
   "devDependencies": {
     "@types/fluent-ffmpeg": "^2.1.27",
-    "typescript": "^5.4.0",
-    "ts-node": "^10.9.1"
+    "ts-node": "^10.9.1",
+    "typescript": "^5.4.0"
   },
   "engines": {
     "node": ">=18"

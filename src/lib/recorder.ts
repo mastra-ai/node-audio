@@ -1,5 +1,5 @@
 import ffmpegPath from "@ffmpeg-installer/ffmpeg";
-import ffmpeg from "fluent-ffmpeg";
+import ffmpeg from "@bropat/fluent-ffmpeg";
 import { StreamInput } from "fluent-ffmpeg-multistream";
 import { PassThrough } from "stream";
 import { EventEmitter } from "events";
@@ -35,7 +35,8 @@ export type RecorderEvents = {
 
 export class Recorder extends EventEmitter<RecorderEvents> {
   stream: NodeJS.WritableStream;
-
+  proc?: ffmpeg.FfmpegCommand;
+  
   ffmpeg = defaultFfmpegOptions;
 
   constructor(public options: RecorderOptions) {
@@ -50,7 +51,8 @@ export class Recorder extends EventEmitter<RecorderEvents> {
   }
 
   start() {
-    const proc = ffmpeg()
+    this.proc = ffmpeg()
+      .withProcessOptions({ detached: true })
       .addInput(new StreamInput(this.stream).url)
       .addInputOptions(this.ffmpeg.inputOptions || [])
       .outputOptions(this.ffmpeg.outputOptions || [])
@@ -68,11 +70,18 @@ export class Recorder extends EventEmitter<RecorderEvents> {
       })
       .output(this.options.outputPath); // Specify the output file path
 
-    proc.run()
+    this.proc.run()
   }
 
   write (data: Buffer) {
     this.stream.write(data);
+  }
+
+  end () {
+    const proc = this.proc as any;
+    if (proc?.ffmpegProc?.stdin) {
+      proc.ffmpegProc.stdin.write("q\n")
+    }
   }
 }
 

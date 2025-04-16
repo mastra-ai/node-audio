@@ -96,7 +96,7 @@ class Huddle extends EventEmitter<HuddleEvents> {
   public stop() {
     this.mic?.stop();
     this.speaker?.close(true);
-    this.recorder?.stream.end();
+    this.recorder?.end();
   }
 
   public interrupt() {
