@@ -1,6 +1,6 @@
 {
   "name": "@mastra/node-audio",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Cross-platform mic/audio recording + playback for Mastra in Node.js",
   "main": "./dist/cjs/main.js",
   "module": "./dist/esm/main.js",
