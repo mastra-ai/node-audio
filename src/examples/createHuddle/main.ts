@@ -2,12 +2,12 @@ import { createHuddle, pathUrlOrStreamToStream } from "../../main";
 
 const stream = pathUrlOrStreamToStream("src/examples/playAudio/hello.wav");
 
-const outputPath = 'src/examples/createHuddle/output.mp3';
+const outputPath = "src/examples/createHuddle/output.mp3";
 
 const huddle = createHuddle({
   record: {
     outputPath,
-  }
+  },
 });
 
 huddle.on("recorder.start", () => {

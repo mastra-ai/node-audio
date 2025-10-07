@@ -1,6 +1,6 @@
 import Speaker from "@mastra/node-speaker";
-import { defaultMicOptions } from "./microphone"
-import { defaultSpeakerOptions } from "./speaker"
+import { defaultMicOptions } from "./microphone";
+import { defaultSpeakerOptions } from "./speaker";
 import NodeMic, { type MicOptions } from "node-mic";
 import { Recorder, type RecorderOptions } from "./recorder";
 import { EventEmitter } from "events";
@@ -63,7 +63,6 @@ class Huddle extends EventEmitter<HuddleEvents> {
 
     this.mic = this.makeMic();
 
-    
     this.recorder = this.makeRecorder();
 
     if (this.recorder) {
@@ -72,16 +71,16 @@ class Huddle extends EventEmitter<HuddleEvents> {
         this.emit("error", error);
       });
 
-      this.recorder?.on('start', () => {
-        this.emit('recorder.start');
-        this.emit('start');
-      })
+      this.recorder?.on("start", () => {
+        this.emit("recorder.start");
+        this.emit("start");
+      });
 
-      this.recorder?.on('end', () => {
-        this.emit('recorder.end');
-      })
+      this.recorder?.on("end", () => {
+        this.emit("recorder.end");
+      });
     } else {
-      this.emit('start');
+      this.emit("start");
     }
 
     this.mic.start();
@@ -121,7 +120,7 @@ class Huddle extends EventEmitter<HuddleEvents> {
     stream.on("data", (chunk: Buffer) => {
       this.recorder?.write(chunk);
     });
-    
+
     this.speaker.on("error", (error) => {
       this.emit("speaker.error", error);
       this.emit("error", error);
