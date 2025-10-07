@@ -1,8 +1,8 @@
 import Speaker from "@mastra/node-speaker";
 import { defaultMicOptions } from "./microphone"
 import { defaultSpeakerOptions } from "./speaker"
-import NodeMic, { MicOptions } from "node-mic";
-import { Recorder, RecorderOptions } from "./recorder";
+import NodeMic, { type MicOptions } from "node-mic";
+import { Recorder, type RecorderOptions } from "./recorder";
 import { EventEmitter } from "events";
 
 export type HuddleOptions = {

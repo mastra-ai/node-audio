@@ -1,18 +1,20 @@
 {
   "compilerOptions": {
-    "outDir": "./dist/esm",
-    "module": "ESNext",
-    "target": "ES2022",
-    "moduleResolution": "node",
-    "declaration": true,
-    "declarationDir": "./dist/types",
-    "sourceMap": true,
-    "strict": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true,
+    "target": "esnext",
+    "lib": ["es2023"],
+    "moduleDetection": "force",
+    "module": "preserve",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
-    "rootDir": "./src"
+    "types": ["node"],
+    "strict": true,
+    "noUnusedLocals": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "skipLibCheck": true
   },
   "include": ["src"]
-} 
+}

@@ -10,8 +10,6 @@ Cross-platform audio I/O toolkit for Node.js — play audio, stream microphone i
 - 🔄 Unified `createHuddle` API for mic/speaker coordination
 - 🧰 Built on `node-mic`, `@mastra/node-speaker`, and `fluent-ffmpeg`
 
----
-
 ## 🚀 Getting Started
 
 ### 1. Install
@@ -44,8 +42,6 @@ sudo apt-get install ffmpeg
 # Windows
 choco install ffmpeg
 ```
-
----
 
 ## 📚 API Reference
 
@@ -115,8 +111,6 @@ agent.voice.on("speaker", (stream) => {
 huddle.stop();
 ```
 
----
-
 ## 🛠 Development
 
 Build both ESM and CommonJS outputs:
@@ -124,8 +118,3 @@ Build both ESM and CommonJS outputs:
 ```bash
 npm run build
 ```
-
----
-
-## 🧩 License
-MIT — built for the Mastra ecosystem

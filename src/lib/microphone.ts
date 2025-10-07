@@ -1,5 +1,6 @@
-import NodeMic, { MicOptions } from "node-mic";
-import { AudioStream } from "node-mic/dist/audio";
+import NodeMic, { type MicOptions } from "node-mic";
+
+type AudioStream = ReturnType<NodeMic['getAudioStream']>;
 
 export const defaultMicOptions: Partial<MicOptions> = {
   rate: 24100,
