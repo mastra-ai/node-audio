@@ -9,41 +9,43 @@ ffmpeg.setFfmpegPath(ffmpegPath.path);
 export const defaultFfmpegOptions = {
   inputOptions: ["-f s16le", "-ar 24k", "-ac 1"] as string[],
   outputOptions: [] as string[], // ["-c:a libmp3lame", "-b:a 128k"]
-}
+};
 
 export type RecorderOptions = {
   outputPath: string;
   ffmpeg?: {
     inputOptions?: string[];
     outputOptions?: string[];
-  }
+  };
 };
 
 export type RecorderEvents = {
   start: [];
   end: [];
-  progress: [{
-    frames: number;
-    currentFps: number;
-    currentKbps: number;
-    targetSize: number;
-    timemark: string;
-    percent?: number | undefined;
-  }];
+  progress: [
+    {
+      frames: number;
+      currentFps: number;
+      currentKbps: number;
+      targetSize: number;
+      timemark: string;
+      percent?: number | undefined;
+    },
+  ];
   error: [Error];
-}
+};
 
 export class Recorder extends EventEmitter<RecorderEvents> {
   stream: NodeJS.WritableStream;
   proc?: ffmpeg.FfmpegCommand;
-  
+
   ffmpeg = defaultFfmpegOptions;
 
   constructor(public options: RecorderOptions) {
     super();
     this.stream = new PassThrough();
     if (options.ffmpeg?.inputOptions) {
-      this.ffmpeg.inputOptions = options.ffmpeg.inputOptions
+      this.ffmpeg.inputOptions = options.ffmpeg.inputOptions;
     }
     if (options.ffmpeg?.outputOptions) {
       this.ffmpeg.outputOptions = options.ffmpeg.outputOptions;
@@ -56,37 +58,39 @@ export class Recorder extends EventEmitter<RecorderEvents> {
       .addInput(new StreamInput(this.stream).url)
       .addInputOptions(this.ffmpeg.inputOptions || [])
       .outputOptions(this.ffmpeg.outputOptions || [])
-      .on('start', () => {
-        this.emit('start');
+      .on("start", () => {
+        this.emit("start");
       })
-      .on('progress', (progress) => {
-        this.emit('progress', progress);
+      .on("progress", (progress) => {
+        this.emit("progress", progress);
       })
-      .on('end', () => {
-        this.emit('end');
+      .on("end", () => {
+        this.emit("end");
       })
-      .on('error', (err) => {
-        this.emit('error', err);
+      .on("error", (err) => {
+        this.emit("error", err);
       })
       .output(this.options.outputPath); // Specify the output file path
 
-    this.proc.run()
+    this.proc.run();
   }
 
-  write (data: Buffer) {
+  write(data: Buffer) {
     this.stream.write(data);
   }
 
-  end () {
+  end() {
     const proc = this.proc as any;
     if (proc?.ffmpegProc?.stdin) {
-      proc.ffmpegProc.stdin.write("q\n")
+      proc.ffmpegProc.stdin.write("q\n");
     }
   }
 }
 
-
-export function recordAudioToFile(stream: NodeJS.ReadableStream, options: RecorderOptions): Recorder {
+export function recordAudioToFile(
+  stream: NodeJS.ReadableStream,
+  options: RecorderOptions,
+): Recorder {
   const recorder = new Recorder(options);
   recorder.start();
   stream.pipe(recorder.stream);

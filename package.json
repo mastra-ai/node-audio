@@ -2,35 +2,45 @@
   "name": "@mastra/node-audio",
   "version": "0.1.6",
   "description": "Cross-platform mic/audio recording + playback for Mastra in Node.js",
-  "main": "./dist/cjs/main.js",
-  "module": "./dist/esm/main.js",
-  "types": "./dist/types/main.d.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
-    "require": "./dist/cjs/main.js",
-    "import": "./dist/esm/main.js",
-    "types": "./dist/types/main.d.ts"
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
   },
   "files": [
     "dist",
-    "src",
     "README.md"
   ],
+  "license": "Apache-2.0",
   "type": "module",
   "scripts": {
-    "build": "tsc -p tsconfig.json && tsc -p tsconfig.cjs.json",
-    "example": "npx bun run src/examples/main.ts"
+    "build": "tsdown",
+    "watch": "tsdown --watch",
+    "example": "npx bun run src/examples/main.ts",
+    "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
     "@bropat/fluent-ffmpeg": "^2.1.3",
     "@ffmpeg-installer/ffmpeg": "^1.1.0",
-    "@mastra/node-speaker": "latest",
+    "@mastra/node-speaker": "^0.1.0",
     "fluent-ffmpeg": "^2.1.2",
     "fluent-ffmpeg-multistream": "^1.0.0",
     "node-mic": "^1.0.1"
   },
   "devDependencies": {
     "@types/fluent-ffmpeg": "^2.1.27",
-    "ts-node": "^10.9.1",
+    "@types/node": "^24.7.0",
+    "tsdown": "^0.15.6",
     "typescript": "^5.4.0"
   },
   "engines": {
