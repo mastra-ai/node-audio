@@ -26,7 +26,8 @@
   "scripts": {
     "build": "tsdown",
     "watch": "tsdown --watch",
-    "example": "npx bun run src/examples/main.ts"
+    "example": "npx bun run src/examples/main.ts",
+    "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
     "@bropat/fluent-ffmpeg": "^2.1.3",
